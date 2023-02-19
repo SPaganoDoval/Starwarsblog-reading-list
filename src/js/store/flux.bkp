@@ -7,8 +7,6 @@ const getState = ({
         store: {
             planets: [],
             selectPlanet: [],
-            people: [],
-            selectPeople: [],
             favorites: []
         },
         actions: {
@@ -17,8 +15,7 @@ const getState = ({
                 getActions().changeColor(0, "green");
             },
             loadSomeData: () => {
-                /** fetch().then().then(data => setStore({ "foo": data.bar })) */
-            },
+                /** fetch().then().then(data => setStore({ "foo": data.bar })) */ },
             getPlanet: (planet) => {
                 setStore({
                     selectPlanet: planet,
@@ -42,32 +39,6 @@ const getState = ({
                 } else {
                     setStore({
                         planets: JSON.parse(localStorage.getItem("planets")),
-                    });
-                }
-            },
-            getPeople: (people) => {
-                setStore({
-                    selectPeople: people,
-                });
-            },
-            getPeoples: async () => {
-                const store = getStore();
-                if (localStorage.getItem("people") === null) {
-                    const response = await fetch(`https://swapi.dev/api/people`, {
-                        method: "GET",
-                        ContentType: "application/json",
-                    });
-                    const responseJSON = await response.json();
-
-                    setStore({
-                        people: responseJSON.results,
-                    });
-
-                    localStorage.setItem(`people`, JSON.stringify(store.people));
-                    let storage = localStorage.getItem("people");
-                } else {
-                    setStore({
-                        people: JSON.parse(localStorage.getItem("people")),
                     });
                 }
             },
